@@ -1,0 +1,5 @@
+<div *ngIf="auth.isAuthenticated$ | async">
+    <p>Prueba</p>
+    <button type="button" [routerLink]="['/episode']" class="btn btn-primary btn-lg">Episodios</button>
+    <button type="button" [routerLink]="['/characters']" class="btn btn-secondary btn-lg">Personajes</button>
+</div>

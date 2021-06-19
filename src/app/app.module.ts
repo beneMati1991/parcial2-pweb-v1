@@ -8,9 +8,12 @@ import { AppComponent } from './app.component';
 import { AuthModule } from '@auth0/auth0-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './pages/home/home.component';
-import { MenuComponent } from './pages/menu/menu.component';
+import { MenuComponent } from './components/menu/menu.component';
 import { EpisodeComponent } from './pages/episode/episode.component';
 import { CharactersComponent } from './pages/characters/characters.component';
+import { LogoutButtonComponent } from './components/logout-button/logout-button.component';
+import { LoginButtonComponent } from './components/login-button/login-button.component';
+import { ErrorComponent } from './pages/error/error.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { CharactersComponent } from './pages/characters/characters.component';
     HomeComponent,
     MenuComponent,
     EpisodeComponent,
-    CharactersComponent
+    CharactersComponent,
+    LogoutButtonComponent,
+    LoginButtonComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

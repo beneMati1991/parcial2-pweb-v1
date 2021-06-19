@@ -1,1 +1,25 @@
 <p>characters works!</p>
+<app-logout-button *ngIf="auth.isAuthenticated$ | async">
+
+</app-logout-button>
+<div *ngIf="auth.isAuthenticated$ | async">
+    <button type="button" [routerLink]="['/']" class="btn btn-info">Volver al Menu Principal</button>
+
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Genero</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of characters">
+            <th scope="row">{{item.id}}</th>
+            <td>{{item.name}}</td>
+            <td>{{item.gender}}</td>
+            <td><img [src]="imageToShow"></td>
+          </tr>
+        </tbody>
+      </table>
+</div>
