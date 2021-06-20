@@ -9,14 +9,13 @@ import { CharactersService } from '../../services/characters.service';
   styleUrls: ['./characters.component.css'],
 })
 export class CharactersComponent implements OnInit {
-  private characters: CharacterObject;
+  public characters: CharacterObject[] = [];
 
   constructor(
     public auth: AuthService,
     private charactersService: CharactersService
   ) {
     this.getAllCharacters();
-    this.getImage();
   }
 
   ngOnInit(): void {}
@@ -25,6 +24,9 @@ export class CharactersComponent implements OnInit {
     this.charactersService.getCharacters().subscribe(
       (data) => {
         this.characters = data.results;
+        this.characters.forEach((element) => {
+          this.getImage(element.id);
+        });
       },
       (err) => {
         console.log('Se produjo error: ' + err);
@@ -32,11 +34,10 @@ export class CharactersComponent implements OnInit {
     );
   }
 
-  getImage() {
-    this.charactersService.getCharacterImage(2).subscribe(
+  getImage(id: number) {
+    this.charactersService.getCharacterImage(id).subscribe(
       (data) => {
         this.createImageFromBlob(data);
-        console.log(data);
       },
       (err) => {
         console.log('Se produjo error: ' + err);
@@ -44,14 +45,14 @@ export class CharactersComponent implements OnInit {
     );
   }
 
-  imageToShow: any;
+  public imageToShow: any[] = [];
 
   createImageFromBlob(image: Blob) {
     let reader = new FileReader();
     reader.addEventListener(
       'load',
       () => {
-        this.imageToShow = reader.result;
+        this.imageToShow.push(reader.result);
       },
       false
     );
