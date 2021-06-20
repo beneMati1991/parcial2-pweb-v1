@@ -14,6 +14,13 @@ import { CharactersComponent } from './pages/characters/characters.component';
 import { LogoutButtonComponent } from './components/logout-button/logout-button.component';
 import { LoginButtonComponent } from './components/login-button/login-button.component';
 import { ErrorComponent } from './pages/error/error.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from './components/modal/modal.component';
+
+import { MDBBootstrapModulesPro } from 'ng-uikit-pro-standard';
+import { MDBSpinningPreloader } from 'ng-uikit-pro-standard';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -24,7 +31,8 @@ import { ErrorComponent } from './pages/error/error.component';
     CharactersComponent,
     LogoutButtonComponent,
     LoginButtonComponent,
-    ErrorComponent
+    ErrorComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,10 +41,14 @@ import { ErrorComponent } from './pages/error/error.component';
     // Import the module into the application, with configuration.
     AuthModule.forRoot({
       domain: 'dev-f5z9j2wu.us.auth0.com',
-      clientId: '82o1FfwPFSxvbaCxVlIuXzcUoogmuzlo'
+      clientId: '82o1FfwPFSxvbaCxVlIuXzcUoogmuzlo',
     }),
+    MDBBootstrapModulesPro.forRoot(),
+    NgbModule,
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [MDBSpinningPreloader],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

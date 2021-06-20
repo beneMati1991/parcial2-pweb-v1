@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { CharacterObject } from 'src/app/models/character';
 import { CharactersService } from '../../services/characters.service';
+import { MDBModalRef, MDBModalService } from 'ng-uikit-pro-standard';
+import { ModalComponent } from 'src/app/components/modal/modal.component';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-characters',
@@ -10,15 +13,45 @@ import { CharactersService } from '../../services/characters.service';
 })
 export class CharactersComponent implements OnInit {
   public characters: CharacterObject[] = [];
+  public imageToShow: any[] = [];
+  modalRef: MDBModalRef;
 
   constructor(
     public auth: AuthService,
-    private charactersService: CharactersService
+    private charactersService: CharactersService,
+    private dialog: MatDialog
   ) {
     this.getAllCharacters();
   }
 
   ngOnInit(): void {}
+
+  openModal(id: number, index: number) {
+    let character: any = this.getCharacterData(id);
+    console.log(character.id);
+    //this.modalRef = this.modalService.show(ModalComponent)
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.data = {
+      name: character.name,
+      gender: character.gender,
+      species: character.species,
+      image: this.imageToShow[index],
+    };
+
+    const dialog = this.dialog.open(ModalComponent, dialogConfig);
+  }
+
+  getCharacterData(id: number) {
+    let obj: any;
+    this.characters.forEach((element) => {
+      if (element.id == id) {
+        obj = new Aux(element);
+      }
+    });
+    return obj.objNew;
+  }
 
   getAllCharacters() {
     this.charactersService.getCharacters().subscribe(
@@ -45,8 +78,6 @@ export class CharactersComponent implements OnInit {
     );
   }
 
-  public imageToShow: any[] = [];
-
   createImageFromBlob(image: Blob) {
     let reader = new FileReader();
     reader.addEventListener(
@@ -60,5 +91,13 @@ export class CharactersComponent implements OnInit {
     if (image) {
       reader.readAsDataURL(image);
     }
+  }
+}
+
+class Aux {
+  objNew: CharacterObject;
+
+  constructor(objRecieve: CharacterObject) {
+    this.objNew = objRecieve;
   }
 }

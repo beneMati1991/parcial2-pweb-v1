@@ -1,4 +1,4 @@
-import { Origin } from "./origin";
+import { Origin } from './origin';
 import { Location } from './location';
 
 export interface CharacterObject {

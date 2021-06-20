@@ -13,7 +13,8 @@ const routes: Routes = [
   },
   {
     path:'episode',
-    component: EpisodeComponent
+    component: EpisodeComponent,
+    canActivate: [AuthGuard]
   },
   {
     path:'characters',

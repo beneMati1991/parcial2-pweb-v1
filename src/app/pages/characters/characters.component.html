@@ -3,22 +3,26 @@
 
 </app-logout-button>
 <div *ngIf="auth.isAuthenticated$ | async">
-    <button type="button" [routerLink]="['/']" class="btn btn-info">Volver al Menu Principal</button>
+  <button type="button" [routerLink]="['/']" class="btn btn-info">Volver al Menu Principal</button>
 
-    <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Genero</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of characters; let i=index">
-            <td><img [src]="imageToShow[i]"></td>
-            <td>{{item.name}}</td>
-            <td>{{item.gender}}</td>
-          </tr>
-        </tbody>
-      </table>
+
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Genero</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of characters; let i=index">
+        <td><img [src]="imageToShow[i]"></td>
+        <td>{{item.name}}</td>
+        <td>{{item.gender}}</td>
+        <td><button mdbBtn color="primary" (click)="openModal(item.id, i)">Info</button></td>
+      </tr>
+    </tbody>
+  </table>
+
 </div>
