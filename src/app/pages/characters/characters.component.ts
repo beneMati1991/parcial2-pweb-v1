@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { CharacterObject } from 'src/app/models/character';
 import { CharactersService } from '../../services/characters.service';
-import { MDBModalRef, MDBModalService } from 'ng-uikit-pro-standard';
+import { MDBModalRef } from 'ng-uikit-pro-standard';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
@@ -15,6 +15,8 @@ export class CharactersComponent implements OnInit {
   public characters: CharacterObject[] = [];
   public imageToShow: any[] = [];
   modalRef: MDBModalRef;
+  public page = 1;
+  public pageSize = 4;
 
   constructor(
     public auth: AuthService,
@@ -28,8 +30,6 @@ export class CharactersComponent implements OnInit {
 
   openModal(id: number, index: number) {
     let character: any = this.getCharacterData(id);
-    console.log(character.id);
-    //this.modalRef = this.modalService.show(ModalComponent)
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
@@ -56,6 +56,7 @@ export class CharactersComponent implements OnInit {
   getAllCharacters() {
     this.charactersService.getCharacters().subscribe(
       (data) => {
+        //console.log(data.results)
         this.characters = data.results;
         this.characters.forEach((element) => {
           this.getImage(element.id);

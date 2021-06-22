@@ -10,6 +10,8 @@ import { EpisodesService } from 'src/app/services/episodes.service';
 })
 export class EpisodeComponent implements OnInit {
   private episodes: EpisodeObject;
+  public page = 1;
+  public pageSize = 7;
 
   constructor(
     public auth: AuthService,

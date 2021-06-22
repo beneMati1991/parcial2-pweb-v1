@@ -1,8 +1,32 @@
-<app-login-button *ngIf="!(auth.isAuthenticated$ | async)">
+<div class="row divContain">
+    <div class="col-3 bg-dark" id="sidenavbar">
+        <nav class="navbar">
+            <ul class="nav navbar-nav">
+                <li class="nav-item">
+                    <app-login-button *ngIf="!(auth.isAuthenticated$ | async)">
 
-</app-login-button>
+                    </app-login-button>
+                </li>
+                <li class="nav-item">
+                    <app-logout-button *ngIf="auth.isAuthenticated$ | async">
 
-<app-logout-button *ngIf="auth.isAuthenticated$ | async">
-
-</app-logout-button>
-<app-menu></app-menu>
+                    </app-logout-button>
+                </li>
+                <li class="nav-item">
+                    <app-menu></app-menu>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="col-9 contenedor">
+        <div class="container hijo">
+            <h2 class="centrado"> Parcial 2 </h2>
+            <div class="container centrado">
+                <img class="imagenRick" src="assets/images/RICKMORTY.jpg">
+            </div>
+            <div class="container centrado">
+                <img class="logo" src="assets/images/logoISTEA.jpg">
+            </div>
+        </div>
+    </div>
+</div>
