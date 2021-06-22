@@ -28,7 +28,7 @@ export class CharactersComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  openModal(id: number, index: number) {
+  openModal(id: number) {
     let character: any = this.getCharacterData(id);
     const dialogConfig = new MatDialogConfig();
 
@@ -37,7 +37,7 @@ export class CharactersComponent implements OnInit {
       name: character.name,
       gender: character.gender,
       species: character.species,
-      image: this.imageToShow[index],
+      image: this.imageToShow[id-1],
     };
 
     const dialog = this.dialog.open(ModalComponent, dialogConfig);
