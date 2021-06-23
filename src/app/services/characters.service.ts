@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { RootObject } from '../models/character';
 
 @Injectable({
   providedIn: 'root',
@@ -12,8 +13,7 @@ export class CharactersService {
     return this.http.get('https://rickandmortyapi.com/api/character');
   }
 
-  getCharacterImage(id: number){
-    let url = 'https://rickandmortyapi.com/api/character/avatar/'+id+'.jpeg';
-    return this.http.get(url, { responseType: 'blob' });
+  getCharactersPaginado(id:number): Observable<RootObject> {
+    return this.http.get<RootObject>('https://rickandmortyapi.com/api/character?page='+id);
   }
 }

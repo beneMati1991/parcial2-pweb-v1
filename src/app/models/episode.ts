@@ -1,3 +1,10 @@
+export interface Info {
+    count: number;
+    pages: number;
+    next: string;
+    prev?: any;
+}
+
 export interface EpisodeObject {
     id: number;
     name: string;
@@ -6,4 +13,9 @@ export interface EpisodeObject {
     characters: string[];
     url: string;
     created: Date;
+}
+
+export interface RootObject {
+    info: Info;
+    results: EpisodeObject[];
 }

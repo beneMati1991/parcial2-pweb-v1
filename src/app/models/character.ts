@@ -1,6 +1,14 @@
 import { Origin } from './origin';
 import { Location } from './location';
 
+
+export interface Info {
+  count: number;
+  pages: number;
+  next: string;
+  prev?: any;
+}
+
 export interface CharacterObject {
   id: number;
   name: string;
@@ -14,4 +22,9 @@ export interface CharacterObject {
   episode: string[];
   url: string;
   created: Date;
+}
+
+export interface RootObject {
+  info: Info;
+  results: CharacterObject[];
 }
