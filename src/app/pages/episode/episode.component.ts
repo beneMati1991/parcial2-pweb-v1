@@ -28,7 +28,7 @@ export class EpisodeComponent implements OnInit {
     this.episodesService.getEpisodes().subscribe(
       (data) => {
         this.pageJSON = data.info.pages;
-        console.log(this.pageJSON);
+        
         //this.episodes = data.results;
         for (let i = 1; i <= this.pageJSON; i++) {
           this.getAllEpisodesPaginado(i);
