@@ -6,6 +6,8 @@ import { MDBModalRef } from 'ng-uikit-pro-standard';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Character } from '../../models/character';
+import { ToastrService } from 'ngx-toastr';
+import { characterModal } from 'src/app/classes/characterAuxiliar';
 
 @Component({
   selector: 'app-characters',
@@ -28,7 +30,8 @@ export class CharactersComponent implements OnInit {
   constructor(
     public auth: AuthService,
     private charactersService: CharactersService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private toastr: ToastrService
   ) {
     this.getAllCharacters();
   }
@@ -56,7 +59,7 @@ export class CharactersComponent implements OnInit {
     let obj: any;
     this.characters.forEach((element) => {
       if (element.id == id) {
-        obj = new Aux(element);
+        obj = new characterModal(element);
       }
     });
     return obj.objNew;
@@ -75,7 +78,8 @@ export class CharactersComponent implements OnInit {
         this.characters  = this.characters.sort()
       },
       (err) => {
-        console.log('Se produjo error: ' + err);
+        //console.log('Se produjo error: ' + err);
+        this.toastr.error(err.status + ' ' + err.name, 'Ocurrio un error.');
       }
     );
   }
@@ -86,7 +90,8 @@ export class CharactersComponent implements OnInit {
         this.characters = this.characters.concat(data.results);
       },
       (err) => {
-        console.log('Se produjo error: ' + err);
+        //console.log('Se produjo error: ' + err);
+        this.toastr.error(err.status + ' ' + err.name, 'Ocurrio un error.');
       }
     );
   }
@@ -168,13 +173,4 @@ export class CharactersComponent implements OnInit {
 
 
 
-}
-
-//clase creada para que cree un objeto al mostrar info, no siempre el mismo.
-class Aux {
-  objNew: CharacterObject;
-
-  constructor(objRecieve: CharacterObject) {
-    this.objNew = objRecieve;
-  }
 }

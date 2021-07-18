@@ -20,6 +20,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { MDBBootstrapModulesPro } from 'ng-uikit-pro-standard';
 import { MDBSpinningPreloader } from 'ng-uikit-pro-standard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
@@ -46,6 +47,12 @@ import { MatDialogModule } from '@angular/material/dialog';
     MDBBootstrapModulesPro.forRoot(),
     NgbModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 1000,
+      progressBar: true,
+      progressAnimation: 'increasing',
+      preventDuplicates: true
+    }),
     MatDialogModule
   ],
   providers: [MDBSpinningPreloader],

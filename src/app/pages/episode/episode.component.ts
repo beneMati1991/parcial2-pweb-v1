@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
+import { ToastrService } from 'ngx-toastr';
 import { EpisodeObject, Episode } from 'src/app/models/episode';
 import { EpisodesService } from 'src/app/services/episodes.service';
+import { Info } from '../../models/episode';
 
 @Component({
   selector: 'app-episode',
@@ -22,7 +24,8 @@ export class EpisodeComponent implements OnInit {
 
   constructor(
     public auth: AuthService,
-    private episodesService: EpisodesService
+    private episodesService: EpisodesService,
+    private toastr: ToastrService
   ) {
     this.getAllEpisodes();
   }
@@ -42,7 +45,8 @@ export class EpisodeComponent implements OnInit {
         this.episodes = this.episodes.sort();
       },
       (err) => {
-        console.log('Se produjo error: ' + err);
+        //console.log('Se produjo error: ' + err);
+        this.toastr.error(err.status + ' ' + err.name, 'Ocurrio un error.');
       }
     );
   }
@@ -53,7 +57,8 @@ export class EpisodeComponent implements OnInit {
         this.episodes = this.episodes.concat(data.results);
       },
       (err) => {
-        console.log('Se produjo error: ' + err);
+        //console.log(err);
+        this.toastr.error(err.status + ' ' + err.name, 'Ocurrio un error.');
       }
     );
   }
