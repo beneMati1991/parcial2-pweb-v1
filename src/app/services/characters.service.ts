@@ -16,4 +16,8 @@ export class CharactersService {
   getCharactersPaginado(id:number): Observable<RootObject> {
     return this.http.get<RootObject>('https://rickandmortyapi.com/api/character?page='+id);
   }
+
+  getBuscarCapitulos( campo:string ){
+    return this.http.get(`https://rickandmortyapi.com/api/character/?name=${ campo }`);
+  }
 }

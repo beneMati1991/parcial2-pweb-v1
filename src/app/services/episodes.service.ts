@@ -17,4 +17,8 @@ export class EpisodesService {
   getEpisodesXPagina(id: number):Observable<RootObject>{
     return this.http.get<RootObject>("https://rickandmortyapi.com/api/episode?page=" + id);
   }
+
+  getBuscarEpisodios( campo:string ){
+    return this.http.get(`https://rickandmortyapi.com/api/episode/?name=${ campo }`);
+  }
 }

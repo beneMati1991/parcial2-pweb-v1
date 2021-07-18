@@ -20,6 +20,11 @@ export class CharactersComponent implements OnInit {
   public pageSize = 6;
   public pagesJSON: number;
 
+  //Order
+  private flagId = 0;
+  private flagName = 0;
+  private flagGenero = 0;
+
   constructor(
     public auth: AuthService,
     private charactersService: CharactersService,
@@ -85,6 +90,84 @@ export class CharactersComponent implements OnInit {
       }
     );
   }
+
+  buscarPersonaje(campo: string) {
+    this.charactersService.getBuscarCapitulos(campo).subscribe(
+      (data: any) => {
+        this.characters = data.results;
+        this.flagId = 0;
+        this.flagName = 0;
+        this.flagGenero = 0;
+      },
+      (err) => {
+        this.characters = []
+      }
+    );
+  }
+
+
+  sortById() {
+    if (this.flagId == 1) {
+      this.characters = this.characters.sort((a, b) => (a.id > b.id ? -1 : 1));
+      this.flagId ++;
+      this.flagName = 0;
+      this.flagGenero = 0;
+    } else {
+      this.characters = this.characters.sort((a, b) => (a.id > b.id ? 1 : -1));
+      this.flagId ++;
+      this.flagName = 0;
+      this.flagGenero = 0;
+    }
+
+    if(this.flagId == 3)
+    {
+      this.flagId = 0;
+    }
+  }
+
+  sortByName() {
+    if (this.flagName == 1) {
+      this.characters = this.characters.sort((a, b) => (a.name > b.name ? -1 : 1));
+      this.flagName ++;
+      this.flagId = 0;
+      this.flagGenero = 0;
+    } else {
+      this.characters = this.characters.sort((a, b) => (a.name > b.name ? 1 : -1));
+      this.flagName ++;
+      this.flagId = 0;
+      this.flagGenero = 0;
+    }
+
+    if(this.flagName == 3)
+    {
+      this.characters = this.characters.sort((a, b) => (a.id > b.id ? 1 : -1));
+      this.flagName = 0;
+    }
+  }
+
+
+  sortByGenero() {
+    if (this.flagGenero == 1) {
+      this.characters = this.characters.sort((a, b) => (a.gender > b.gender ? -1 : 1));
+      this.flagGenero ++;
+      this.flagId = 0;
+      this.flagName = 0;
+    } else {
+      this.characters = this.characters.sort((a, b) => (a.gender > b.gender ? 1 : -1));
+      this.flagGenero ++;
+      this.flagId = 0;
+      this.flagName = 0;
+    }
+
+    if(this.flagGenero == 3)
+    {
+      this.characters = this.characters.sort((a, b) => (a.id > b.id ? 1 : -1));
+      this.flagGenero = 0;
+    }
+  }
+
+
+
 }
 
 //clase creada para que cree un objeto al mostrar info, no siempre el mismo.
