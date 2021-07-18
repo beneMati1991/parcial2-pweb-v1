@@ -15,6 +15,7 @@ import { characterModal } from 'src/app/classes/characterAuxiliar';
   styleUrls: ['./characters.component.css'],
 })
 export class CharactersComponent implements OnInit {
+  //#region Variables
   public characters: Array<CharacterObject> = [];
   public imageToShow: any[] = [];
   modalRef: MDBModalRef;
@@ -27,13 +28,15 @@ export class CharactersComponent implements OnInit {
   private flagName = 0;
   private flagGenero = 0;
 
+  //#endregion
+
   constructor(
     public auth: AuthService,
     private charactersService: CharactersService,
     private dialog: MatDialog,
     private toastr: ToastrService
   ) {
-    this.getAllCharacters();
+    this.getAllCharacters("");
   }
 
   ngOnInit(): void {}
@@ -66,14 +69,15 @@ export class CharactersComponent implements OnInit {
   }
 
   //Obtiene todos los personajes.
-  getAllCharacters() {
-    this.charactersService.getCharacters().subscribe(
+  getAllCharacters(campo: string) {
+    this.characters = [];
+    this.charactersService.getCharacters(campo).subscribe(
       (data) => {
         this.pagesJSON = data.info.pages;
         
         for (let i = 1; i <= this.pagesJSON; i++) {
           //Obtengo todas las paginaciones del servicio.
-          this.getAllCharactersPaginado(i);
+          this.getAllCharactersPaginado(campo,i);
         }
         this.characters  = this.characters.sort()
       },
@@ -84,8 +88,8 @@ export class CharactersComponent implements OnInit {
     );
   }
 
-  getAllCharactersPaginado(id: number){
-    this.charactersService.getCharactersPaginado(id).subscribe(
+  getAllCharactersPaginado(campo: string, id: number){
+    this.charactersService.getCharactersPaginado(campo,id).subscribe(
       (data: Character) => {
         this.characters = this.characters.concat(data.results);
       },
@@ -110,7 +114,7 @@ export class CharactersComponent implements OnInit {
     );
   }
 
-
+  //#region Orden
   sortById() {
     if (this.flagId == 1) {
       this.characters = this.characters.sort((a, b) => (a.id > b.id ? -1 : 1));
@@ -170,7 +174,6 @@ export class CharactersComponent implements OnInit {
       this.flagGenero = 0;
     }
   }
-
-
+  //#endregion
 
 }

@@ -3,7 +3,6 @@ import { AuthService } from '@auth0/auth0-angular';
 import { ToastrService } from 'ngx-toastr';
 import { EpisodeObject, Episode } from 'src/app/models/episode';
 import { EpisodesService } from 'src/app/services/episodes.service';
-import { Info } from '../../models/episode';
 
 @Component({
   selector: 'app-episode',
@@ -66,7 +65,16 @@ export class EpisodeComponent implements OnInit {
   buscarEpisodio(campo: string) {
     this.episodesService.getBuscarEpisodios(campo).subscribe(
       (data: any) => {
-        this.episodes = data.results;
+        this.pageJSON = data.info.pages;
+
+        //this.episodes = data.results;
+        for (let i = 1; i <= this.pageJSON; i++) {
+          this.getAllEpisodesBuscarPaginado(campo,i);
+        }
+        //this.episodes = auxLista.sort();
+        this.episodes = [];
+
+        //this.episodes = data.results;
         this.flagId = 0;
         this.flagName = 0;
         this.flagAirDate = 0;
@@ -74,6 +82,19 @@ export class EpisodeComponent implements OnInit {
       },
       (err) => {
         this.episodes = []
+        this.toastr.error('No existen elementos con ese nombre', 'Ocurrio un error.');
+      }
+    );
+  }
+
+  getAllEpisodesBuscarPaginado(campo: string, id: number) {
+    this.episodesService.getBuscarEpisodiosXPagina(campo,id).subscribe(
+      (data: Episode) => {
+        this.episodes = this.episodes.concat(data.results);
+      },
+      (err) => {
+        //console.log(err);
+        this.toastr.error(err.status + ' ' + err.name, 'Ocurrio un error.');
       }
     );
   }

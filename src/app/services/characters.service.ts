@@ -13,12 +13,14 @@ export class CharactersService {
 
   constructor(private http: HttpClient) {}
 
-  getCharacters(): Observable<any> {
-    return this.http.get(this.baseUrl);
+  getCharacters(campo: string): Observable<any> {
+    //return this.http.get(this.baseUrl);
+    return this.http.get(this.baseUrl + `/?name=${ campo }`);
   }
 
-  getCharactersPaginado(id:number): Observable<Character> {
-    return this.http.get<Character>(this.baseUrl + '?page='+id);
+  getCharactersPaginado(campo:string, id:number): Observable<Character> {
+    //return this.http.get<Character>(this.baseUrl + '?page='+id);
+    return this.http.get<Character>(this.baseUrl + `/?name=${ campo }&page=${id}`);
   }
 
   getBuscarCapitulos( campo:string ){

@@ -25,7 +25,7 @@
       <div *ngIf="auth.isAuthenticated$ | async">
         <hr>
         <div class="row">
-          <input type="text" #campo class="form-control" value="" (keyup)="buscarPersonaje(campo.value)"
+          <input type="text" #campo class="form-control" value="" (keyup)="getAllCharacters(campo.value)"
             placeholder="Nombre Personaje">
         </div>
         <table class="table table-striped">

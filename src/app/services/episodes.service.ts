@@ -24,4 +24,8 @@ export class EpisodesService {
   getBuscarEpisodios( campo:string ){
     return this.http.get(this.baseUrl + `/?name=${ campo }`);
   }
+
+  getBuscarEpisodiosXPagina ( campo: string, id: number):Observable<Episode>{
+    return this.http.get<Episode>(this.baseUrl + `/?name=${ campo }` + '&page=' + id);
+  }
 }

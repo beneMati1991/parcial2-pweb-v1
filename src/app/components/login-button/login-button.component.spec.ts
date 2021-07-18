@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginButtonComponent } from './login-button.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthModule } from '@auth0/auth0-angular';
 
 describe('LoginButtonComponent', () => {
   let component: LoginButtonComponent;
@@ -8,9 +11,16 @@ describe('LoginButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoginButtonComponent ]
-    })
-    .compileComponents();
+      imports: [
+        RouterTestingModule,
+        HttpClientModule,
+        AuthModule.forRoot({
+          domain: 'dev-f5z9j2wu.us.auth0.com',
+          clientId: '82o1FfwPFSxvbaCxVlIuXzcUoogmuzlo',
+        })
+      ],
+      declarations: [LoginButtonComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
