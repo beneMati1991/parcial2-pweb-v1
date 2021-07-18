@@ -24,7 +24,7 @@ export interface CharacterObject {
   created: Date;
 }
 
-export interface RootObject {
+export interface Character {
   info: Info;
   results: CharacterObject[];
 }

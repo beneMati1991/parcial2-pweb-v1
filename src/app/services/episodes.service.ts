@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RootObject } from '../models/episode';
+import { Episode } from '../models/episode';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,8 @@ export class EpisodesService {
     return this.http.get("https://rickandmortyapi.com/api/episode");
   }
 
-  getEpisodesXPagina(id: number):Observable<RootObject>{
-    return this.http.get<RootObject>("https://rickandmortyapi.com/api/episode?page=" + id);
+  getEpisodesXPagina(id: number):Observable<Episode>{
+    return this.http.get<Episode>("https://rickandmortyapi.com/api/episode?page=" + id);
   }
 
   getBuscarEpisodios( campo:string ){

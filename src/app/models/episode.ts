@@ -15,7 +15,7 @@ export interface EpisodeObject {
     created: Date;
 }
 
-export interface RootObject {
+export interface Episode {
     info: Info;
     results: EpisodeObject[];
 }

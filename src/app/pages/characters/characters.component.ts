@@ -5,7 +5,7 @@ import { CharactersService } from '../../services/characters.service';
 import { MDBModalRef } from 'ng-uikit-pro-standard';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { RootObject } from '../../models/character';
+import { Character } from '../../models/character';
 
 @Component({
   selector: 'app-characters',
@@ -82,7 +82,7 @@ export class CharactersComponent implements OnInit {
 
   getAllCharactersPaginado(id: number){
     this.charactersService.getCharactersPaginado(id).subscribe(
-      (data: RootObject) => {
+      (data: Character) => {
         this.characters = this.characters.concat(data.results);
       },
       (err) => {

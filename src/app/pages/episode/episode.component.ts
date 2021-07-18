@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
-import { EpisodeObject, RootObject } from 'src/app/models/episode';
+import { EpisodeObject, Episode } from 'src/app/models/episode';
 import { EpisodesService } from 'src/app/services/episodes.service';
 
 @Component({
@@ -49,7 +49,7 @@ export class EpisodeComponent implements OnInit {
 
   getAllEpisodesPaginado(id: number) {
     this.episodesService.getEpisodesXPagina(id).subscribe(
-      (data: RootObject) => {
+      (data: Episode) => {
         this.episodes = this.episodes.concat(data.results);
       },
       (err) => {
