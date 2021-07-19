@@ -1,4 +1,7 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AuthModule } from '@auth0/auth0-angular';
 
 import { MenuComponent } from './menu.component';
 
@@ -8,9 +11,16 @@ describe('MenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MenuComponent ]
-    })
-    .compileComponents();
+      imports: [
+        RouterTestingModule,
+        HttpClientModule,
+        AuthModule.forRoot({
+          domain: 'dev-f5z9j2wu.us.auth0.com',
+          clientId: '82o1FfwPFSxvbaCxVlIuXzcUoogmuzlo',
+        }),
+      ],
+      declarations: [MenuComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +29,12 @@ describe('MenuComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('se crea objeto', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('existe barra nav', () => {
+    const button = fixture.debugElement.nativeElement.querySelector('nav');
+    expect(button).toBeDefined();
+  });
 });

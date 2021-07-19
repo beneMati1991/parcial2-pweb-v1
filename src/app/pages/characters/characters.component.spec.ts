@@ -40,7 +40,25 @@ describe('CharactersComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component.getAllCharacters).toBeTruthy();
+  it('existe método getAllCharacters', () => {
+    expect(component.getAllCharacters).toBeDefined();
   });
+
+  it('existe método openModal', () => {
+    expect(component.openModal).toBeDefined();
+  });
+
+  it('existe método getCharacterData', () => {
+    expect(component.getCharacterData).toBeDefined();
+  });
+
+  it('lista inicia con ningun valor', () => {
+    expect(component.characters.length).toBe(0);
+  });
+
+  // it('se carga valores en lista', () => {
+  //   component.getAllCharacters('a');
+  //   const listaCharacter = component.characters;
+  //   expect(listaCharacter).length > 0;
+  // });
 });
