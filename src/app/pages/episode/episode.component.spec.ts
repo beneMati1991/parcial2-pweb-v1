@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthModule } from '@auth0/auth0-angular';
 import { ToastrModule } from 'ngx-toastr';
-
 import { EpisodeComponent } from './episode.component';
 
 describe('EpisodeComponent', () => {
@@ -23,8 +22,8 @@ describe('EpisodeComponent', () => {
           timeOut: 1000,
           progressBar: true,
           progressAnimation: 'increasing',
-          preventDuplicates: true
-        })
+          preventDuplicates: true,
+        }),
       ],
       declarations: [EpisodeComponent],
     }).compileComponents();
@@ -38,5 +37,13 @@ describe('EpisodeComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('traer todos los episodios (41)', async () => {
+    //console.log(component.episodes);
+    component.ngOnInit();
+    await fixture.whenStable();
+    //console.log(component.episodes);
+    expect(component.episodes.length).toEqual(41)
   });
 });

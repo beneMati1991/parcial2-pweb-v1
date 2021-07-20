@@ -1,6 +1,6 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { TestBed, inject } from '@angular/core/testing';
-
+import { HttpClientModule } from '@angular/common/http';
+import { TestBed } from '@angular/core/testing';
+import { Episode } from '../models/episode';
 import { EpisodesService } from './episodes.service';
 
 describe('EpisodesService', () => {
@@ -8,27 +8,21 @@ describe('EpisodesService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [EpisodesService]
+      imports: [HttpClientModule],
+      providers: [EpisodesService],
     });
     service = TestBed.inject(EpisodesService);
   });
 
   it('valor url base', () => {
     const url = service.baseUrl;
-    expect(url).toContain('episode')
+    expect(url).toContain('episode');
   });
 
-  it('main service return 3 pages', () => {
-    
-    let variable = 3;
-    service.getEpisodes().subscribe(
-      data => {
-        expect(data.info.pages).toBe(3);
-        variable = data;
-      }
-    );
-    expect(variable).toBe(3);
-  })
-
+  it('service traer episodio Total Rickall', (done: DoneFn) => {
+    service.getBuscarEpisodios('Total Rickall').subscribe((data: Episode) => {
+      expect(data.results[0].name).toEqual('Total Rickall');
+      done();
+    });
+  });
 });

@@ -10,7 +10,7 @@ import { EpisodesService } from 'src/app/services/episodes.service';
   styleUrls: ['./episode.component.css'],
 })
 export class EpisodeComponent implements OnInit {
-  private episodes: Array<EpisodeObject> = [];
+  public episodes: Array<EpisodeObject> = [];
   public page = 1;
   public pageSize = 7;
   private pageJSON: number;
