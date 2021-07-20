@@ -23,7 +23,7 @@ export class CharactersService {
     return this.http.get<Character>(this.baseUrl + `/?name=${ campo }&page=${id}`);
   }
 
-  getBuscarCapitulos( campo:string ){
-    return this.http.get(this.baseUrl + `/?name=${ campo }`);
+  getBuscarCapituloXId( id:string ){
+    return this.http.get(this.baseUrl + `/${id}`);
   }
 }

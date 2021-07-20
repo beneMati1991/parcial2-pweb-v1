@@ -22,6 +22,8 @@ import { MDBSpinningPreloader } from 'ng-uikit-pro-standard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { MatDialogModule } from '@angular/material/dialog';
+import { Ng2OrderModule } from 'ng2-order-pipe';
+import { Ng2SearchPipe, Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { MatDialogModule } from '@angular/material/dialog';
       progressAnimation: 'increasing',
       preventDuplicates: true
     }),
-    MatDialogModule
+    MatDialogModule,
+    Ng2OrderModule,
+    Ng2SearchPipeModule
   ],
   providers: [MDBSpinningPreloader],
   bootstrap: [AppComponent],
